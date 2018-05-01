@@ -10,10 +10,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Main extends Frame {
-
-    int Dimensions = 2;
     ArrayList<int[]> snake = new ArrayList<>();
-    int[] apple = new int[Dimensions];
+    int[] apple = new int[2];
     boolean isDead = false;
     int direction = 1;
 
@@ -83,6 +81,9 @@ public class Main extends Frame {
                     case 40:
                         down();
                 }
+                try {
+                    Thread.sleep(100);
+                } catch(InterruptedException ignore){}
             }
 
             @Override
@@ -109,6 +110,11 @@ public class Main extends Frame {
 
             if(isDead) System.out.println("dead");
         }
+
+        System.out.println("Final Score: " + snake.size());
+        Thread.sleep(3000);
+        dispose();
+        main(null);
     }
 
     @Override
@@ -133,46 +139,40 @@ public class Main extends Frame {
         g2d.setPaint(Color.BLACK);
 
         g2d.fill(new Rectangle(apple[0], apple[1], 10, 10));
+
+        g2d.setFont(new Font("Arial", Font.BOLD, 20));
+
+        g2d.drawString("Score: " + Integer.toString(snake.size()), 360, 250);
     }
 
     //<editor-fold desc="Up, down, left & right">
     void up(){
-        System.out.println("up");
-        direction = 0;
-        if(snake.size()>3) {
-            move();
-            testEat();
-        }
+        if(direction!=2) {
+            System.out.println("up");
+            direction = 0;
+        } else System.out.println("not up");
     }
 
     void down(){
-        System.out.println("down");
-        direction = 2;
-        if(snake.size()>3) {
-            move();
-            testEat();
-        }
+        if(direction!=0) {
+            System.out.println("down");
+            direction = 2;
+        } else System.out.println("not down");
     }
 
     void left(){
-        System.out.println("left");
-        direction = 3;
-        if(snake.size()>3) {
-            move();
-            testEat();
-        }
+        if(direction!=1) {
+            System.out.println("left");
+            direction = 3;
+        } else System.out.println("not left");
     }
 
     void right(){
-        System.out.println("right");
-        direction = 1;
-        if(snake.size()>3) {
-            move();
-            testEat();
-        }
+        if(direction!=3) {
+            System.out.println("right");
+            direction = 1;
+        } else System.out.println("not right");
     }
-
-    //TODO: Don't allow the extra movement if near edge
     //</editor-fold>
 
     void move(){
