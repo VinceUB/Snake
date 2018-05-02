@@ -4,12 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <scm>
-
-    </scm>
     <groupId>io.github.vkb24312.snake</groupId>
     <artifactId>Snake</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <scm>
+        <url>https://github.com/vkb24312/Snake.git</url>
+        <connection>svn:git:https://github.com/vkb24312/Snake.git</connection>
+        <developerConnection>svn:git:https://github.com/vkb24312/Snake.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
@@ -25,6 +30,15 @@
         <finalName>${project.artifactId} v${project.version}</finalName>
 
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.9.5</version>
+                <configuration>
+                    <connectionType>connection</connectionType>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
