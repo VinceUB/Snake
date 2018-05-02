@@ -15,9 +15,10 @@ public class SnakeGame extends Frame {
     boolean isDead = false;
     int direction = 1;
     long timeAlive = 0;
+    boolean appleIsInSnake;
 
     void main(Snake mover) throws InterruptedException {
-        //if(mover==null) {
+        if(mover==null) {
             repaint();
 
             this.setVisible(true);
@@ -90,7 +91,7 @@ public class SnakeGame extends Frame {
 
                 }
             });
-        //}
+        }
 
         snake.add(new int[]{50, 50});
 
@@ -251,11 +252,24 @@ public class SnakeGame extends Frame {
     }
 
     boolean testEat() {
-        if ((snake.get(0)[0] == apple[0]) && (snake.get(0)[1] == apple[1])) {
-            grow();
-            apple[0] = (new Random().nextInt(30) + 5) * 10;
+        if ((snake.get(0)[0] == apple[0]&&snake.get(0)[1]==apple[1])) {
+            appleIsInSnake = false;
+            do {
+                grow();
+                apple[0] = (new Random().nextInt(30) + 5) * 10;
 
-            apple[1] = (new Random().nextInt(30) + 5) * 10;
+                apple[1] = (new Random().nextInt(30) + 5) * 10;
+
+                int[][] snake = new int[this.snake.size()][2];
+                snake = this.snake.toArray(snake);
+
+                for(int[] snakeObject : snake){
+                    if(snakeObject == apple){
+                        appleIsInSnake = true;
+                        break;
+                    }
+                }
+            } while (appleIsInSnake);
 
             return true;
         } else return false;
